@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Login</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Admin Panel</h1>
+            <p>Please sign in to manage your website</p>
+        </div>
+        
+        <div id="error-message" class="error-message">
+            Invalid username or password
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn">Sign In</button>
+        </form>
+        
+        <div class="footer">
+            <p>Secure Admin Panel &copy; 2025</p>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Initialize login functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (AdminAuth.login(username, password)) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Show error message
+                    document.getElementById('error-message').style.display = 'block';
+                    
+                    // Clear password field
+                    document.getElementById('password').value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit File</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Admin Panel</div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="#" id="logout-link" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="editor-header">
+            <div class="file-info">
+                <h1 id="file-title">Edit File</h1>
+                <p id="file-path">Loading...</p>
+            </div>
+            <div>
+                <a href="dashboard.html" class="btn btn-back">Back to Dashboard</a>
+            </div>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div id="editor-container">
+            <div class="loading">Loading file content...</div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Initialize editor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!AdminAuth.isLoggedIn()) {
+                window.location.href = 'index.html';
+            }
+            
+            // Logout functionality
+            document.getElementById('logout-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                AdminAuth.logout();
+                window.location.href = 'index.html';
+            });
+            
+            // Get file parameter from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const filePath = urlParams.get('file');
+            
+            if (!filePath) {
+                document.getElementById('editor-container').innerHTML = `
+                    <div class="message error" style="display: block;">
+                        No file specified. Please select a file from the dashboard.
+                    </div>
+                `;
+            } else {
+                // Update file info
+                document.getElementById('file-title').textContent = `Editing: ${filePath.split('/').pop()}`;
+                document.getElementById('file-path').textContent = filePath;
+                
+                // Create editor form
+                const editorContainer = document.getElementById('editor-container');
+                editorContainer.innerHTML = `
+                    <form id="editor-form" class="editor-form">
+                        <div class="form-group">
+                            <label for="file-content">File Content:</label>
+                            <textarea id="file-content" placeholder="Loading file content..."></textarea>
+                        </div>
+                        <div class="button-group">
+                            <button type="button" id="cancel-btn" class="btn btn-cancel">Cancel</button>
+                            <button type="submit" class="btn btn-save">Save Changes</button>
+                        </div>
+                    </form>
+                `;
+                
+                // Load file content
+                FileManager.loadFile(filePath).then(content => {
+                    document.getElementById('file-content').value = content;
+                });
+                
+                // Cancel button functionality
+                document.getElementById('cancel-btn').addEventListener('click', function() {
+                    if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+                        window.location.href = 'dashboard.html';
+                    }
+                });
+                
+                // Form submission
+                document.getElementById('editor-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const content = document.getElementById('file-content').value;
+                    
+                    // Save file content
+                    FileManager.saveFile(filePath, content).then(success => {
+                        if (success) {
+                            UI.showMessage('File saved successfully!', 'success');
+                        } else {
+                            UI.showMessage('Error saving file.', 'error');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

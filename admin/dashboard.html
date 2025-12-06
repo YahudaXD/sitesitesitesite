@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Admin Panel</div>
+            <div class="user-info">
+                <span id="welcome-message">Welcome, Admin!</span>
+                <a href="#" id="logout-btn" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 class="dashboard-title">Website Management Dashboard</h1>
+        
+        <div class="stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-files">0</div>
+                    <div class="stat-label">HTML Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="arabic-files">0</div>
+                    <div class="stat-label">Arabic Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="english-files">0</div>
+                    <div class="stat-label">English Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="languages">0</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Manage Website Files</h2>
+        <div class="files-grid" id="files-container">
+            <div class="no-files">Loading files...</div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Initialize dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!AdminAuth.isLoggedIn()) {
+                window.location.href = 'index.html';
+            }
+            
+            // Set welcome message
+            const username = AdminAuth.getUsername();
+            document.getElementById('welcome-message').textContent = `Welcome, ${username}!`;
+            
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                AdminAuth.logout();
+                window.location.href = 'index.html';
+            });
+            
+            // Render files
+            const htmlFiles = FileManager.getHtmlFiles();
+            const filesContainer = document.getElementById('files-container');
+            filesContainer.innerHTML = '';
+            
+            if (htmlFiles.length === 0) {
+                filesContainer.innerHTML = '<div class="no-files">No files found</div>';
+            } else {
+                htmlFiles.forEach(file => {
+                    const fileCard = document.createElement('div');
+                    fileCard.className = 'file-card';
+                    fileCard.innerHTML = `
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-path">${file.path}</div>
+                        <div class="file-actions">
+                            <a href="editor.html?file=${encodeURIComponent(file.path)}" class="btn btn-edit">Edit File</a>
+                            <a href="../${file.path}" target="_blank" class="btn btn-view">View</a>
+                        </div>
+                    `;
+                    filesContainer.appendChild(fileCard);
+                });
+            }
+            
+            // Update stats
+            document.getElementById('total-files').textContent = htmlFiles.length;
+            document.getElementById('arabic-files').textContent = htmlFiles.filter(file => file.path.startsWith('ar/')).length;
+            document.getElementById('english-files').textContent = htmlFiles.filter(file => file.path.startsWith('en/')).length;
+            document.getElementById('languages').textContent = 3; // ar, en, default
+        });
+    </script>
+</body>
+</html>

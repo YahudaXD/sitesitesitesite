@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ek Hizmetlerimiz - Hostbizde</title>
+    <meta name="description" content="Web siteniz için ek profesyonel hizmetler. WhatsApp botu, Google Ads, Meta Ads ve SEO optimizasyonu gibi hizmetlerle sitenizi öne çıkarın.">
+    <meta name="keywords" content="web sitesi hizmetleri, WhatsApp botu, Google reklamları, Facebook reklamları, SEO optimizasyonu">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --darker: #020617;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --text: #334155;
+            --heading: #0f172a;
+            --border: #cbd5e1;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+            background-size: cover;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            cursor: default;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--heading);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+        }
+        
+        .tagline {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            margin-top: 0.1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+        
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            position: relative;
+            letter-spacing: 0.01em;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--heading);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+        
+        .breadcrumb ol {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+        
+        .breadcrumb li:not(:last-child)::after {
+            content: '/';
+            margin-left: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .breadcrumb li:last-child a {
+            color: var(--gray);
+            pointer-events: none;
+        }
+        
+        .features {
+            padding: 5rem 5%;
+            background-color: rgba(255, 255, 255, 0.85);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .features::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .features > .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.25rem;
+            color: var(--heading);
+            position: relative;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .feature-card:active {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: var(--heading);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            text-align: center;
+            min-width: 160px;
+            letter-spacing: 0.025em;
+            text-transform: capitalize;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(37, 99, 235, 0.15);
+            border-color: var(--primary);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(255, 142, 83, 0.4);
+        }
+        
+        .features-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem 5% 2rem;
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--heading);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .footer-column p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            color: var(--heading);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Language Selector Styles */
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-selector {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .current-language {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            width: 30px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .current-language:hover {
+            transform: scale(1.1);
+        }
+        
+        .flag {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            background-size: cover;
+            background-position: center;
+            display: inline-block;
+        }
+        
+        .flag.tr {
+            background-image: url('https://flagcdn.com/24x18/tr.png');
+        }
+        
+        .flag.en {
+            background-image: url('https://flagcdn.com/24x18/us.png');
+        }
+        
+        .flag.fr {
+            background-image: url('https://flagcdn.com/24x18/fr.png');
+        }
+        
+        .flag.cn {
+            background-image: url('https://flagcdn.com/24x18/cn.png');
+        }
+        
+        .flag.it {
+            background-image: url('https://flagcdn.com/24x18/it.png');
+        }
+        
+        .language-flags {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .flag-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            width: 30px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flag-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .flag-button.active {
+            background-color: rgba(37, 99, 235, 0.3);
+            border: 1px solid white;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 250px;
+                height: calc(100vh - 70px);
+                transition: all 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+                border-left: 1px solid var(--border);
+            }
+            
+            nav ul.show {
+                right: 0;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">Hostbizde</div>
+            <div class="tagline">Premium Web Sitesi Pazar Yeri</div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="header-right">
+            <div class="language-selector" id="languageSelector">
+                <div class="language-flags">
+                    <button class="flag-button active" data-lang="tr">
+                        <span class="flag tr" title="Türkçe"></span>
+                    </button>
+                    <button class="flag-button" data-lang="en">
+                        <span class="flag en" title="English"></span>
+                    </button>
+                    <button class="flag-button" data-lang="fr">
+                        <span class="flag fr" title="Français"></span>
+                    </button>
+                    <button class="flag-button" data-lang="zh">
+                        <span class="flag cn" title="中文"></span>
+                    </button>
+                    <button class="flag-button" data-lang="it">
+                        <span class="flag it" title="Italiano"></span>
+                    </button>
+                </div>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="create.html">Web Siteni Oluştur</a></li>
+                    <li><a href="sell.html">Web Siteni Sat</a></li>
+                    <li><a href="about.html">Hakkımızda</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                    <li><a href="services.html">Ek Hizmetlerimiz</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="#">Ek Hizmetlerimiz</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Ek Hizmetlerimiz</h2>
+            <p class="section-subtitle">Web sitenizi daha da öne çıkarmanız için profesyonel hizmetler</p>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp Botu</h3>
+                    <p>Müşterilerinizle 7/24 otomatik iletişim kurun. Sipariş alma, bilgi verme ve müşteri hizmetlerini kolaylaştırın.</p>
+                    <a href="contact.html" class="btn">Hizmet Al</a>
+                </div>
+                
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h3>Google Ads</h3>
+                    <p>Hedef kitlenize ulaşın. Profesyonel Google reklamları ile web sitenizi tanıtır, müşteri kazanırsınız.</p>
+                    <a href="contact.html" class="btn">Hizmet Al</a>
+                </div>
+                
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fab fa-meta"></i>
+                    </div>
+                    <h3>Meta Ads</h3>
+                    <p>Facebook ve Instagram üzerinden hedef kitlenize ulaşın. Etkili sosyal medya reklamları ile marka bilinirliği oluşturun.</p>
+                    <a href="contact.html" class="btn">Hizmet Al</a>
+                </div>
+                
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>SEO Optimizasyonu</h3>
+                    <p>Web sitenizi arama motorlarında üst sıralara taşıyın. Daha fazla organik trafik çekerek satışlarınızı artırın.</p>
+                    <a href="contact.html" class="btn">Hizmet Al</a>
+                </div>
+            </div>
+            <div class="features-cta">
+                <a href="contact.html" class="btn btn-secondary">Tüm Hizmetler için İletişime Geçin</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hostbizde</h3>
+                    <p>2020'den beri web sitesi alım satımı için güvenilir platform. Girişimcileri fırsatlarla buluşturuyoruz. Binlerce memnun müşteri, onlarca profesyonel danışman ve 10.000'den fazla web sitesi ile sektörde öncü konumdayız.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="#websites">Satılık Web Siteleri</a></li>
+                        <li><a href="sell.html">Web Siteni Sat</a></li>
+                        <li><a href="about.html">Hakkımızda</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+						<li><a href="services.html">Ek Hizmetlerimiz</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>İletişim Bilgileri</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</li>
+                        <li><i class="fas fa-phone"></i> +90 530-393-5703</li>
+                        <li><i class="fas fa-envelope"></i> destek@hostbizde.com</li>
+                        <li><i class="fas fa-clock"></i> Pzt-Cuma: 09:00 - 18:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <div class="container">
+                <p>&copy; 2025 Hostbizde. Tüm hakları saklıdır.</p>
+                <p>Developed by Dopinder - Stanya</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('show');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+        
+        // Language selector functionality
+        document.querySelectorAll('.flag-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.flag-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get selected language
+                const selectedLang = this.getAttribute('data-lang');
+                
+                // Implement language switching by redirecting to the appropriate language version
+                // Get current page name
+                const currentPage = window.location.pathname.split('/').pop() || 'services.html';
+                
+                // Redirect to language-specific version
+                if (selectedLang === 'tr') {
+                    // Default language, use root path
+                    window.location.href = currentPage;
+                } else {
+                    // For other languages, redirect to language subdirectory
+                    window.location.href = `/${selectedLang}/` + currentPage;
+                }
+            });
+        });
+        
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observe elements with animate class
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.classList.remove('animate');
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
